@@ -32,15 +32,17 @@ def cross_off(request, list_id):
     item = List.objects.get(pk=list_id)
     item.completed = True
     item.save()
+    messages.success(request,('Item Has Been Uncrossed'))
     return redirect('home')
 
 def uncross(request, list_id):
     item = List.objects.get(pk=list_id)
     item.completed = False
     item.save()
+    messages.success(request,('Item Has Been Crossed'))
     return redirect('home')
 
-def edit (request, list_id):
+def edit(request, list_id):
     if request.method == 'POST':
         item = List.objects.get(pk=list_id)
 
@@ -50,6 +52,6 @@ def edit (request, list_id):
             form.save()
             messages.success(request,('Item Has Been Edited'))
             return redirect('home')
-        else:
-            item = List.objects.get(pk=list_id)
-            return render(request, 'edit.html', {'item': item})
+    else:
+        item = List.objects.get(pk=list_id)
+        return render(request, 'edit.html', {'item': item})

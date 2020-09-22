@@ -1,11 +1,12 @@
 from django.conf.urls import url
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url(r'^',views.home, name="home"),
+    path(r'',views.home, name="home"),
     #url(r'^delete/<id>/', views.delete, name="delete"),
-    url(r'^delete/(?P<pk>.*)', views.delete, name="delete"),
-    url(r'^cross_off/(?P<pk>.*)', views.cross_off, name="cross_off"),
-    url(r'^uncross/(?P<pk>.*)', views.uncross, name="uncross"),
-    url(r'^edit/(?P<pk>.*)', views.edit, name="edit"),
+    path(r'delete/<int:list_id>', views.delete, name="delete"),
+    path(r'cross_off/<int:list_id>', views.cross_off, name="cross_off"),
+    path(r'uncross/<int:list_id>', views.uncross, name="uncross"),
+    path(r'edit/<int:list_id>', views.edit, name="edit"),
 ]
